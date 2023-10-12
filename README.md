@@ -1,2 +1,2 @@
 # java
-A collection of all of my Java projects over the years. 
+This repository contains multiple Java projects, each with its unique purpose and functionality.
