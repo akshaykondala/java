@@ -1,0 +1,72 @@
+CheckDigit.java:
+---------------
+/* 
+Akshay Kondala 09/13/23
+
+This practice FRQ teaches us the general idea of the first question of the APCSA FRQ
+section. The first question consisntely asks about methods and control structures,
+and this practice demonstrates the use of these skills. This program asks to 
+check the last digit of the sum of multiples, and compare the numbers, returning the
+last digit, and a boolean depending on the validity of the check. Furthermore, the 
+lesson delves into the skill of using methods and passing variables to each method.
+
+*/
+public class CheckDigit{
+    
+
+    public static int getCheck(int num){
+        int x = 0; // the variable the numbers are added to
+        int mx = 7; //the descending multiple 
+        for (int i = 1; i<=getNumberOfDigits(num); i++){ //the loop reiterates the amount of digits in the variable 'num'
+            x += getDigits(num, i)*mx; //the variable x gets loaded with the sum of the products of descending multiples
+            mx--; //subtracts the multiple by 1 after every iteration of the loop
+        }
+        return x%=10; // returns final digit of calculated sum of products
+        }
+       
+        
+    public static int getNumberOfDigits(int num){ 
+        String str = num +""; //converts the 'num' variable to a String
+        return str.length(); //returns the length of the String
+    }
+    
+    public static boolean isValid(int num){
+        int checkNumber = (num%10); //calculates the number used to check
+        if (checkNumber == getCheck(num/10)){ //compares the checkNumber test to the getCheck number calculated (num/10 removes the last digit of the variable)
+            return true; //returns true if the numbers match
+        }
+        else{
+        return false; //returns false if the numbers do not match
+        }
+    }
+    
+    public static int getDigits(int num, int n){ //provided method
+        String str = num+""; //converts the 'num' variable to a String
+        int digit = Integer.parseInt(str.substring(n-1,n)); 
+        return digit; //returns digit
+            
+        }
+    
+}
+
+CheckDigitTester.java:
+---------------------
+public class CheckDigitTester {
+    public static void main(String[] args) {
+        
+    // Constructor
+    CheckDigit test = new CheckDigit();
+    
+    // Test cases testing getCheck
+       System.out.println("run:" + test.getCheck(283415) +", expected: 6");
+       System.out.println("run:" + test.getCheck(2183) +", expected: 2");
+    // Test cases testing isValid
+       System.out.println("run:" + test.isValid(2834150) +", expected: false");
+       System.out.println("run:" + test.isValid(2834156) +", expected: true");
+       System.out.println("run:" + test.isValid(2834158) +", expected: false");
+       System.out.println("run:" + test.isValid(21833) +", expected: false");
+       System.out.println("run:" + test.isValid(21832) +", expected: true");
+       System.out.println("run:" + test.isValid(21831) +", expected: false");
+    }
+}
+
