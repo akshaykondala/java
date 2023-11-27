@@ -1,0 +1,161 @@
+Vocab.java:
+----------
+public class Vocab
+{
+    private String[] theVocab;
+    
+    public Vocab(String[] arr){
+        theVocab = arr;
+    }
+    
+    public boolean findWord(String str){
+        for(String theVocabs : theVocab){
+            if(theVocabs.equals(str)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public int countNotInVocab(String [] wordArray){
+        int count = 0;
+        
+        for (String word : wordArray){
+            if (!findWord(word)){
+                count++;
+            }
+        }
+        return count; 
+    }
+    
+    public String[] notInVocab(String[] wordArray){
+        String[] wordsNotInVocab = new String[countNotInVocab(wordArray)];
+        int i = 0; 
+        for (String words : wordArray){
+            if (!findWord(words)){
+                wordsNotInVocab[i] = words; 
+                i++;
+            }
+            
+        }
+        return wordsNotInVocab;
+        
+    }
+    
+    
+}
+
+VocabTester.java:
+----------------
+public class VocabTester {
+    public static void main(String[] args) {
+   
+    //Tester 1
+     
+    System.out.println("Test 1");
+    
+  
+    String[] theVocab = {"time", "food", "dogs", "cats", "health","plants","sports"};
+    String[] wordArray = {"dogs","toys","sun","plants","time"};
+    
+    Vocab find = new Vocab(theVocab); 
+    
+    System.out.println("Expected");
+    System.out.println("-------------");
+    System.out.println("Amount of words not in vocab: 2");
+    System.out.println("Words not in Vocab: {toys, sun}");
+    
+    System.out.println();
+    
+    System.out.println("Actual");
+    System.out.println("-------------");
+    System.out.println("Amount of words not in vocab: " + find.countNotInVocab(wordArray));
+    System.out.print("Words not in Vocab: {");
+    
+    int count = 0;
+    for (String word : find.notInVocab(wordArray)){
+        count++;
+         if (count == find.notInVocab(wordArray).length){
+            System.out.print(word);
+            break;
+        }
+        System.out.print(word + ", ");
+       
+    }
+    System.out.print("}");
+    //Test 1 End
+    System.out.println();
+    System.out.println();
+
+    System.out.println();
+     
+    System.out.println("Test 2");
+    
+    //Tester 2
+    String[] wordArray2 = {"gum","fishstick","alkali","drugs","halogens","redox","charger"};
+    String[] theVocab2 = {"alkali","halogens","redox"};
+    
+    Vocab finda = new Vocab(theVocab2);
+    
+    System.out.println("Expected");
+    System.out.println("-------------");
+    System.out.println("Amount of words not in vocab: 4");
+    System.out.println("Words not in Vocab: {gum, fishstick, drugs, charger}");
+    
+    System.out.println();
+    
+    System.out.println("Actual");
+    System.out.println("-------------");
+    System.out.println("Amount of words not in vocab: " + finda.countNotInVocab(wordArray2));
+    System.out.print("Words not in Vocab: {");
+    int count2 = 0;
+    for (String worda : finda.notInVocab(wordArray2)){
+        count2++;
+         if (count2 == finda.notInVocab(wordArray2).length){
+            System.out.print(worda);
+            break;
+        }
+        System.out.print(worda + ", ");
+       
+    }
+    System.out.print("}");
+    //Test 2 End
+    
+    //Tester 3
+    System.out.println();
+    System.out.println();
+    System.out.println();
+     
+    System.out.println("Test 3");
+    
+    String[] wordArray3 = {"miley","ariana","katy","sza","hannah"};
+    String[] theVocab3 = {"miley","ariana"};
+    
+    Vocab findb = new Vocab(theVocab3);
+    
+    System.out.println("Expected");
+    System.out.println("-------------");
+    System.out.println("Amount of words not in vocab: 3");
+    System.out.println("Words not in Vocab: {katy, sza, hannah}");
+    
+    System.out.println();
+    
+    System.out.println("Actual");
+    System.out.println("-------------");
+    System.out.println("Amount of words not in vocab: " + findb.countNotInVocab(wordArray3));
+    System.out.print("Words not in Vocab: {");
+    int count3 = 0;
+    for (String wordb : findb.notInVocab(wordArray3)){
+        count3++;
+         if (count3 == findb.notInVocab(wordArray3).length){
+            System.out.print(wordb);
+            break;
+        }
+        System.out.print(wordb + ", ");
+       
+    }
+    System.out.print("}");
+    //Test 3 End
+    }
+}
+
