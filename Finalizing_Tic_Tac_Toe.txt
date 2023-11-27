@@ -1,0 +1,203 @@
+TicTacToe.java:
+--------------
+public class TicTacToe
+{
+   //copy over your constructor from the Tic Tac Toe Board activity in the previous lesson!
+   private int turn;
+   private String[][] arr = new String[3][3];
+   public TicTacToe(){
+    for(int i = 0; i<arr.length; i++){
+        for(int j = 0; j<arr[i].length; j++){
+            arr[i][j] = "-";
+        }
+    }
+    }
+   
+   //this method returns the current turn
+   public int getTurn()
+   {
+       return turn; 
+   }
+   
+   /*This method prints out the board array on to the console
+   */
+   public void printBoard()
+   {
+       int counter = 0; 
+           System.out.println("  0 1 2");
+        for(String[] row: arr)
+        {
+            System.out.print(counter + " ");
+            for(String play: row)
+            
+            {
+                System.out.print(play + " ");
+                
+            }
+            System.out.println();
+            counter++;
+        }
+    }
+   
+   
+   //This method returns true if space row, col is a valid space
+   public boolean pickLocation(int row, int col)
+   {
+      if (arr[row][col].equals("-")){
+          return true;
+      }
+      return false; 
+   }
+   
+   //This method places an X or O at location row,col based on the int turn
+   public void takeTurn(int row, int col)
+   {
+       if (getTurn()%2==0){
+           arr[row][col]="X";
+       }
+       else{
+           arr[row][col]="O";
+       }
+       turn++;
+   }
+   
+   //This method returns a boolean that returns true if a row has three X or O's in a row
+   public boolean checkRow()
+   {
+        
+         int col = 0;
+       for (int row = 0; row<arr.length; row++)
+        {
+              if (arr[row][col].equals("X") && arr[row][col+1].equals("X") && arr[row][col+2].equals("X"))
+              {
+                  return true;
+              }
+              
+              if (arr[row][col].equals("O") && arr[row][col+1].equals("O") && arr[row][col+2].equals("O")){
+                  return true; 
+              }
+           
+           
+          
+       }
+       return false; 
+   }
+   
+   
+    //This method returns a boolean that returns true if a col has three X or O's
+   public boolean checkCol()
+   {
+       int row = 0;
+       for (int col = 0; col<arr.length; col++)
+        {
+              if (arr[row][col].equals("X") && arr[row+1][col].equals("X") && arr[row+2][col].equals("X"))
+              {
+                  return true;
+              }
+              
+              if (arr[row][col].equals("O") && arr[row+1][col].equals("O") && arr[row+2][col].equals("O")){
+                  return true; 
+              }
+           
+           
+          
+       }
+        return false; 
+   }
+   
+    //This method returns a boolean that returns true if either diagonal has three X or O's
+   public boolean checkDiag()
+   {
+       int row = 0; 
+       int col = 0;
+        
+          
+           if (arr[row][col].equals("X") && arr[row+1][col+1].equals("X") && arr[row+2][col+2].equals("X"))
+              {
+                  return true;
+              }
+              
+              if (arr[row][col].equals("O") && arr[row+1][col+1].equals("O") && arr[row+2][col+2].equals("O")){
+                  return true; 
+              }
+            if (arr[row+2][col].equals("X") && arr[row+1][col+1].equals("X") && arr[row][col+2].equals("X"))
+              {
+                  return true;
+              }
+              
+              if (arr[row+2][col].equals("O") && arr[row+1][col+1].equals("O") && arr[row][col+2].equals("O")){
+                  return true; 
+              }
+           
+       
+        
+       return false; 
+   }
+   
+   //This method returns a boolean that checks if someone has won the game
+   public boolean checkWin()
+   {
+      return checkDiag() || checkCol() || checkRow(); 
+   }
+
+}
+
+TicTacToeTester.java:
+--------------------
+import java.util.Scanner;
+public class TicTacToeTester
+{
+    public static void main(String[] args)
+    {
+        //This is to help you test your methods. Feel free to add code at the end to check
+        //to see if your checkWin method works!
+        Scanner input  = new Scanner (System.in);
+        
+        
+        TicTacToe game = new TicTacToe();
+        System.out.println("Initial Game Board:");
+        game.printBoard();
+        int aRow = 0;
+        int aCol = 0;
+        int winner = 0;
+        int counter = 0;
+        while (game.checkWin()==false){
+            System.out.print("Enter what row to place (0, 1, or 2): ");
+            aRow = input.nextInt();
+            if (!(aRow==1 || aRow == 0 || aRow == 2)){
+                System.out.println("Invalid. Please input another");
+                continue;
+            }
+            System.out.print("Enter what column to place (0, 1, or 2): ");
+            aCol = input.nextInt();
+             if (!(aCol==1 || aCol == 0 || aCol == 2)){
+                System.out.println("Invalid. Please input another");
+                continue;
+            }
+            if (game.pickLocation(aRow,aCol) == false){
+                System.out.println("Space taken. Please input another.");
+                continue;
+            }
+            game.takeTurn(aRow,aCol);
+            game.printBoard();
+            winner = game.getTurn() % 2 + 1;
+            counter++;
+            if (counter==9){
+            System.out.println("Tie game! No winner.");
+            break;
+            }
+        }
+        
+        
+        if (counter!=9){
+        System.out.println("Game over! Player " + winner +  " wins.");
+        
+        }
+        
+        
+       
+        
+    
+    }
+}
+
