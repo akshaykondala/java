@@ -1,0 +1,126 @@
+CoinGame.java:
+-------------
+/*
+
+09/25/2023 Akshay Kondala
+
+This program teaches us the usage of iteration in Java as well as 
+the use of multiple methods, if statements, if else statements,
+private initialized variables, and the use of Math methods like Math.abs(). 
+The game essentially asks to determine each player's coin values depending
+on various moves they make. Then, we use compound assignment 
+variables to change each player's coin values. 
+
+*/
+
+public class CoinGame
+{
+    private int startingCoins; //declares startingCoins variable to be used throughout class
+    private int maxRounds;//declares maxRounds variable to be used throughout class
+    
+    public CoinGame(int s, int r) //constructor to take in startingCoins and maxRounds value
+    {
+        startingCoins = s; //setting constructor equal to previously declared integers
+        maxRounds = r; 
+    }
+    
+    public int getMovePlayer1(int round){ //given
+        if (round==1||round==2||round==4){
+            return 3; 
+        }
+        if (round==3){
+            return 1; 
+        }
+        if (round==5){
+            return 3; 
+        }
+       return 3;
+    }
+    
+    public int getMovePlayer2(int round){  //given
+        if (round%3==0){
+            return 3;
+        }
+        if (round%2==0){
+            return 2;
+        }
+        return 1;
+    }
+    
+    public void PlayGame(){ //creates PlayGame method
+        int round = 1; //starting at round 1
+        int p1=startingCoins; //setting each player's coin values appropriately
+        int p2=startingCoins;
+        
+        while (round<=5 && p1>3 && p2>3){ //game parameters, game only runs while all true
+            System.out.println("Round: " + round); //prints current round
+            System.out.println(); //spacer
+            if (round==1){ //prints starting coin values on first round
+                System.out.println("Player 1 Starting Coins: " + startingCoins);
+                System.out.println("Player 2 Starting Coins: " + startingCoins);
+            }
+            int p1Move = getMovePlayer1(round); //creating move variable to use 
+            int p2Move = getMovePlayer2(round);
+            
+            p1-=p1Move; //subtracting coins used from starting coins
+            p2-=p2Move;
+            if (((Math.abs(p1Move-p2Move))==1)){ //determining difference using absolute value 
+                System.out.println("Player 1 plays: " + p1Move + " coins."); //prints player moves
+                System.out.println("Player 2 plays: " + p2Move + " coins.");
+                
+                p2++; //p2 win condition in effect
+                System.out.println("Player two gains one coin back per the \"off-by-one\" rule"); //prints the result of the round
+            
+                
+            }
+            
+            if ((Math.abs(p1Move-p2Move))==0){
+                System.out.println("Player 1 plays: " + p1Move + " coins.");//prints player moves
+                System.out.println("Player 2 plays: " + p2Move + " coins.");
+                p2++;
+                
+                System.out.println("Player two gains one coin back per the \"same\" rule");//prints the result of the round
+            }
+            if (Math.abs(p1Move-p2Move)==2){ //p1 win condition
+                System.out.println("Player 1 plays: " + p1Move + " coins.");//prints player moves
+                System.out.println("Player 2 plays: " + p2Move + " coins.");
+                p1+=2; //p1 win condition in effect
+                System.out.println("Player two gains one coin back per the \"off-by-two\" rule");//prints the result of the round
+            }
+            System.out.println("Current Player 1 Coins: " + p1); //prints coin values at the end of the round
+            System.out.println("Current Player 2 Coins: " + p2);
+            System.out.println("End of round."); //declares end of round
+            System.out.println();
+            System.out.println("-----------------------------------------"); //dashed line between rounds
+            if (round==maxRounds){ //when all rounds complete, print reason for game end
+                System.out.println();
+                System.out.println("All rounds complete");
+            }
+            
+            round++; //moves on to next round after iteration
+        }
+        System.out.println();
+        if (p1>p2){ //determine winner 
+            System.out.println("GAME RESULT: Player one wins!");
+        }
+        else if (p1<p2){
+            System.out.println("GAME RESULT: Player two wins!");
+        }
+        else if (p1==p2){ //expected
+            System.out.println("GAME RESULT: Tie game!");
+        }
+    }
+}
+
+CoinGameTester.java:
+-------------------
+public class CoinGameTester {
+    public static void main(String[] args) {
+        
+        CoinGame game = new CoinGame(10, 5); //calls constructor while inputting appropriate values
+        game.PlayGame(); //calls PlayGame
+        
+        //expected output: "Tie Game!""
+    }
+}
+
