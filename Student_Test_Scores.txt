@@ -1,0 +1,150 @@
+HSStudent.java:
+--------------
+public class HSStudent extends StudentTest {
+
+    private int serviceHours;
+
+    public HSStudent(String name, int mathScore, int elaScore, int serviceHours){
+       super(name, mathScore, elaScore);
+       this.serviceHours=serviceHours;
+       
+    }
+
+    public int getServiceHours(){
+       return serviceHours;
+    }
+
+    public void setServiceHours(int serviceHours){
+       this.serviceHours = serviceHours;
+       
+    }
+
+    // If math score is at least 525, return true
+    public boolean passMath(){
+        if (super.getMathScore()>=525){
+            return true;
+        }
+        
+        return false; 
+        
+    }
+
+    // If ela score is at least 560, return true
+    public boolean passEla(){
+       if (super.getElaScore()>=500){
+           return true;
+       }
+       
+       return false; 
+       
+    }
+
+    // If service hours are at least 75, return true
+    public boolean completeService(){
+        
+        if (serviceHours>=75){
+            return true;
+        }
+        return false; 
+    }
+
+    // If the student has passed math, passed ela, and completed
+    // service hours, return true.
+    public boolean gradQualify(){
+       
+       if (completeService()==true && passMath()==true && passEla()==true){
+           return true;
+       }
+       
+       return false;
+    }
+
+    // If the student has qualified for graduation, print:
+    // (name) has qualified for graduation.
+    // Otherwise print:
+    // (name) has not yet qualified for graduation.
+    // Where (name) is the student's name.
+    public String toString(){
+        if (gradQualify()){
+            return super.getName() + " has qualified for graduation.";
+        }
+
+        return super.getName() + " has not yet qualified for graduation.";
+    }
+}
+
+StudentTest.java:
+----------------
+public class StudentTest {
+
+    private int mathScore;
+    private int elaScore;
+    private String name;
+
+    public StudentTest(String name, int mathScore, int elaScore){
+       this.name = name;
+       this.mathScore = mathScore;
+       this.elaScore = elaScore;
+    }
+
+	public int getMathScore() {
+	return mathScore;
+	
+	}
+
+	public void setMathScore(int mathScore) {
+		this.mathScore = mathScore;
+	}
+
+	public int getElaScore() {
+	    return elaScore;
+	}
+
+	public void setElaScore(int elaScore) {
+		this.elaScore=elaScore;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+}
+
+StudentTester.java:
+------------------
+import java.util.Scanner;
+
+public class StudentTester
+{
+    public static void main(String[] args)
+    {
+        // Prompt the user for name, test scores, and service hours
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("Please enter the student name");
+        String name = input.nextLine();
+        
+         System.out.println("Please enter the Math Score");
+        int math = input.nextInt();
+        
+         System.out.println("Please enter the ELA Score");
+        int ela = input.nextInt();
+        
+         System.out.println("Please enter the Service Hours");
+        int service = input.nextInt();
+        
+        HSStudent hello = new HSStudent(name, math, ela, service);
+        
+        // Create a HSStudent object
+        
+        // Print the results
+        
+        System.out.println("Pass Math? " + hello.passMath());
+          System.out.println("Pass ELA? " + hello.passEla());
+          System.out.println("Completed Service Hours? " +  hello.completeService());
+            System.out.println(hello);
+        
+        
+    }
+}
+
