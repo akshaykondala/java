@@ -1,0 +1,120 @@
+RSVP.java:
+---------
+/* 
+Akshay Kondala 09/18/2023
+
+The program is another practice FRQ that demonstrates our knowledge of if else 
+statements, nested if statements, methods and constructors, tester classes,
+and String initialization. The program asks to print certain statements when 
+the tester class inputted a boolean and a value. If the boolean returned true, 
+the code was to say they were attending, and vice versa. Furthermore, each 
+integer selection corresponds with various food choices which needed to be printed.
+In addition the program asked us to add to Strings using an addition operator. 
+Finally, we were asked to use the .equals method in order to compare two strings.
+
+*/
+
+
+public class RSVP {
+    
+    public void rsvp(boolean rsvp, int selection){ //takes in values from tester
+        String option1 = ""; //initialize variables
+        String option2 = "";
+        
+        
+        if (rsvp==true){ //if attending
+            System.out.println("attending"); //print attending
+            option1="Thanks for attending. You will be served "; //begin option1 string 
+            
+            if (selection==1){
+                option1+="beef;"; //add to option1 string depending on selection
+            }
+            else if (selection==2){
+                option1+="chicken.";
+            }
+            else if (selection==3){
+                option1+="pasta.";
+            }
+            else{
+                option1+="fish."; //else for every other selection input
+            }
+        }
+        
+        else{ //if not attending
+            System.out.println("not attending"); //print not attending
+            option1 = "Sorry you can't make it."; //assign appropriate String to option1 when not attending
+        }
+        
+        
+        if (selection==1){ //print food choice depending on selection input from tester
+            System.out.println("beef");
+        }
+        else if (selection==2){
+            System.out.println("chicken");
+        }
+        else if (selection==3){
+            System.out.println("pasta");
+        }
+        else {
+            System.out.println("fish");
+        }
+        
+        System.out.println("option1==option2=" + option1.equals(option2)); //check if option1 and option2 are equal
+    }
+    
+        
+    
+}
+
+RSVPTester.java:
+---------------
+public class RSVPTester
+{
+    public static void main(String[] args)
+    {
+        RSVP info = new RSVP(); //Constructor
+        
+       
+        //Test 1: Attending, Fish, False
+        System.out.println("EXPECTED: \nattending \nfish \noption1==option2=false");
+        System.out.println("");
+        System.out.println("ACTUAL: ");
+        info.rsvp(true,4);
+        System.out.println("-------------------");
+        System.out.println("");
+        
+        //Test 2: Not attending, Fish, False
+        System.out.println("EXPECTED: \nnot attending \nfish \noption1==option2=false");
+        System.out.println("");
+        System.out.println("ACTUAL: ");
+        info.rsvp(false,15);
+        System.out.println("-------------------");
+        System.out.println("");
+        
+        //Test 3: Not attending, Chicken, False
+        System.out.println("EXPECTED: \nnot attending \nchicken \noption1==option2=false");
+        System.out.println("");
+        System.out.println("ACTUAL: ");
+         info.rsvp(false,2);
+        System.out.println("");
+        System.out.println("-------------------");
+        System.out.println("");
+         
+        //Test 4: Not attending, Pasta, False 
+        System.out.println("EXPECTED: \nnot attending \npasta \noption1==option2=false");
+        System.out.println("");
+        System.out.println("ACTUAL: ");
+        info.rsvp(false,3);
+        System.out.println("");
+        System.out.println("-------------------");
+        System.out.println("");
+         
+        //Test 5: Attending, Beef, False  
+        System.out.println("EXPECTED: \nattending \nbeef \noption1==option2=false");
+        System.out.println("");
+        System.out.println("ACTUAL: ");
+        info.rsvp(true,1);
+        System.out.println("-------------------");
+    }
+}
+
