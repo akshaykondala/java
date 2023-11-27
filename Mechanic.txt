@@ -1,0 +1,60 @@
+CarRepair.java:
+--------------
+public class CarRepair
+{
+    private int mechanicNum;
+    private int bayNum; 
+    
+    public CarRepair(int m, int b){
+        mechanicNum = m;
+        bayNum = b; 
+    }
+    
+    public int getMechanicNum(){
+        return mechanic num;
+    }
+    
+    public int getBayNum(){
+        return bayNum; 
+    }
+    
+    
+}
+
+RepairSchedule.java:
+-------------------
+public class RepairSchedule {
+    
+    private ArrayList<CarRepair> schedule; 
+    private int numberOfMechanics;
+    
+    public RepairSchedule(int n)
+    {
+        schedule = new ArrayList<CarRepair>();
+        numberOfMechanics = n;
+    }
+    
+    public boolean addRepair(int m, int b){
+        int theM; 
+        int theB; 
+        
+        (CarRepair x : schedule){
+            theM = x.getMechanicNum();
+            theB = x.getBayNum();
+        }
+        
+        if (theM==m && theB==b){
+            return false; 
+        }
+        return true; 
+    }
+    
+    public ArraList<Integer> availableMechanics(){
+        
+    }
+    
+    public void carOut(int b){
+        
+    }
+}
+
