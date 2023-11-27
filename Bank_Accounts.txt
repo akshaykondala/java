@@ -1,0 +1,99 @@
+Account.java:
+------------
+public class Account
+{
+    private int accountNumber;
+    private double balance;
+    
+    // Initialize values in constructor
+    public Account(int accountNumber, double openingBal){
+       this.accountNumber=accountNumber;
+       balance = openingBal; 
+    }
+    
+    // Complete the accessor method
+    public double getBalance(){
+        return balance; 
+        
+    }
+    
+    // Add amount to balance
+    public void deposit(double amount){
+       balance += amount; 
+       
+    }
+    
+    // Subtract amount from balance
+    public void withdraw(double amount){
+        balance-=amount; 
+        
+    }
+    
+    // Should read: Regular account current balance $__.__
+    public String toString(){
+       return "Regular account current balance $" + balance;
+       
+    }
+}
+
+BankTester.java:
+---------------
+public class BankTester
+{
+    public static void main(String[] args)
+    {
+        // Test both of your classes
+        // Make sure you call every method you wrote!
+        
+        Account x = new Account(12, 40.3);
+        System.out.println(x);
+        
+           StudentAccount y = new StudentAccount(12, 40.3);
+        System.out.println(y);
+    }
+}
+
+StudentAccount.java:
+-------------------
+public class StudentAccount extends Account
+{
+    // Complete this class with Override methods.   
+    
+
+    public StudentAccount(int accountNumber, double openingBal){
+        super(accountNumber, openingBal);
+    }
+    
+    // Students get a 10% bonus on depositing
+   
+    
+    // Add amount to balance
+    @Override
+    public void deposit(double amount){
+      super.deposit(amount*1.1); 
+       
+    }
+    
+    // Subtract amount from balance
+     @Override
+    public void withdraw(double amount){
+       super.withdraw(amount+1.5); 
+        
+    }
+    
+    // Should read: Regular account current balance $__.__
+     @Override
+    public String toString(){
+       return "Student account current balance $" + super.getBalance();
+       
+    }
+    
+    
+    // Students pay a $1.50 fee for withdrawing
+    
+    
+    
+    // toString() Should read: Student account current balance $__.__
+    
+}
+
